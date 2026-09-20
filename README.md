@@ -4,7 +4,7 @@ India-only car travel desk for **Vedashri Travels**. Two links share one Node.js
 
 | Link | Who | Path |
 |------|-----|------|
-| Customer site | Book local, airport and outstation trips | `/` |
+| Customer site | Book local, airport and outstation trips | `index.html` |
 | Customer app | Mobile home-screen view | `/app.html` |
 | Owner desk | Fleet, rates, staff, accounts, reports | `/owner.html` |
 
