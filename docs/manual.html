@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vedashri Travels — User manual and publish guide</title>
+  <style>
+    body { font-family: Georgia, serif; max-width: 820px; margin: 32px auto; padding: 0 20px; color: #102318; line-height: 1.45; }
+    h1, h2, h3 { font-weight: 600; }
+    h1 { border-bottom: 3px solid #1b4332; padding-bottom: 8px; }
+    h2 { color: #1b4332; margin-top: 36px; }
+    code, pre { font-family: ui-monospace, monospace; background: #eef6f0; }
+    pre { padding: 12px; overflow: auto; border-radius: 8px; }
+    .shot { border: 1px solid #c5d5cb; border-radius: 10px; margin: 12px 0 20px; overflow: hidden; }
+    .shot svg { display: block; width: 100%; height: auto; }
+    .cap { font-size: 13px; color: #4d6356; margin-top: -12px; margin-bottom: 18px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #c5d5cb; padding: 6px 8px; text-align: left; font-size: 14px; }
+    .note { background: #fff8e6; border-left: 4px solid #c9a227; padding: 10px 12px; }
+  </style>
+</head>
+<body>
+  <h1>Vedashri Travels</h1>
+  <p>User manual, hosting guide, and how to publish this app on GitHub. India-only car travel: customer booking site and owner dashboard on one server.</p>
+
+  <h2>1. The two website links</h2>
+  <table>
+    <tr><th>Audience</th><th>URL path</th><th>Purpose</th></tr>
+    <tr><td>Customer</td><td>/</td><td>Home, book, fleet, my trips, pay, AI assistant</td></tr>
+    <tr><td>Customer app</td><td>/app.html</td><td>Mobile-sized entry; add to home screen</td></tr>
+    <tr><td>Owner</td><td>/owner.html</td><td>Company, fleet, rates, drivers, staff, bookings, accounts, reports</td></tr>
+  </table>
+  <p>Owner PIN (change after first login): <strong>2145</strong></p>
+
+  <h2>2. Customer home (always the start)</h2>
+  <p>Every load opens the home page. From here the customer picks Local, Airport or Outstation, or sends a query to the owner.</p>
+  <div class="shot">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280">
+      <rect width="800" height="280" fill="#1b4332"/>
+      <text x="40" y="48" fill="#fff" font-size="22" font-family="Georgia">Vedashri Travels</text>
+      <text x="40" y="78" fill="#d8f3dc" font-size="13" font-family="sans-serif">Safe, on-time car travel across India</text>
+      <rect x="40" y="110" width="70" height="28" rx="14" fill="#2d6a4f"/>
+      <text x="55" y="129" fill="#fff" font-size="12">Local</text>
+      <rect x="120" y="110" width="80" height="28" rx="14" fill="#2d6a4f"/>
+      <text x="132" y="129" fill="#fff" font-size="12">Airport</text>
+      <rect x="210" y="110" width="96" height="28" rx="14" fill="#2d6a4f"/>
+      <text x="222" y="129" fill="#fff" font-size="12">Outstation</text>
+      <rect x="40" y="168" width="140" height="36" rx="10" fill="#c9a227"/>
+      <text x="68" y="191" fill="#1a1404" font-size="14">Book a trip</text>
+      <rect x="200" y="168" width="150" height="36" rx="10" fill="#fff"/>
+      <text x="224" y="191" fill="#1b4332" font-size="14">Customer app</text>
+    </svg>
+  </div>
+  <p class="cap">Figure 1. Customer home — trip types and booking entry.</p>
+
+  <h2>3. Booking, map and fare</h2>
+  <ol>
+    <li>Choose Local, Airport or Outstation.</li>
+    <li>For airport, choose Pickup or Drop (different fixed rates per car).</li>
+    <li>Choose Single or Return. Return bills both ways on distance slabs.</li>
+    <li>Type From and To from the India place list. The map moves to that place. You never enter coordinates.</li>
+    <li>Set start and end dates. Extra days between them are waiting days, charged per car per day.</li>
+    <li>Pick a car. The estimate updates: slab fare + waiting.</li>
+    <li>Pay with GPay, UPI, card or cash, then Confirm booking. A WhatsApp greeting link opens.</li>
+  </ol>
+  <div class="shot">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320">
+      <rect width="800" height="320" fill="#f7f3ea"/>
+      <rect x="16" y="16" width="300" height="288" rx="12" fill="#fff" stroke="#d5e2d8"/>
+      <text x="32" y="44" font-size="14" fill="#1b4332" font-family="Georgia">Book your trip</text>
+      <rect x="32" y="60" width="80" height="24" rx="8" fill="#1b4332"/>
+      <text x="48" y="76" fill="#fff" font-size="11">Local</text>
+      <rect x="118" y="60" width="80" height="24" rx="8" fill="#eef6f0"/>
+      <text x="130" y="76" fill="#4d6356" font-size="11">Airport</text>
+      <text x="32" y="110" font-size="11" fill="#4d6356">FROM</text>
+      <rect x="32" y="116" width="250" height="28" rx="6" fill="#f7fbf8" stroke="#d5e2d8"/>
+      <text x="40" y="135" font-size="12" fill="#102318">Shivajinagar, Pune</text>
+      <text x="32" y="168" font-size="11" fill="#4d6356">TO</text>
+      <rect x="32" y="174" width="250" height="28" rx="6" fill="#f7fbf8" stroke="#d5e2d8"/>
+      <text x="40" y="193" font-size="12" fill="#102318">Mahabaleshwar, Maharashtra</text>
+      <rect x="336" y="16" width="448" height="200" rx="12" fill="#cfe3d6"/>
+      <circle cx="420" cy="120" r="8" fill="#1b4332"/>
+      <text x="434" y="124" font-size="11">From</text>
+      <circle cx="680" cy="70" r="8" fill="#c9a227"/>
+      <text x="694" y="74" font-size="11">To</text>
+      <path d="M420 120 L680 70" stroke="#2d6a4f" stroke-width="3" fill="none"/>
+      <rect x="336" y="228" width="448" height="76" rx="12" fill="#fff" stroke="#40916c"/>
+      <text x="352" y="258" font-size="12" fill="#4d6356">Estimated fare</text>
+      <text x="352" y="286" font-size="22" fill="#1b4332" font-family="Georgia">Rs 9,100</text>
+    </svg>
+  </div>
+  <p class="cap">Figure 2. Place names drive the map. Fare uses distance slabs, return multiplier and waiting days.</p>
+
+  <h2>4. How fares are calculated</h2>
+  <p>Each car has its own rates, set by the owner.</p>
+  <table>
+    <tr><th>Piece</th><th>Rule</th></tr>
+    <tr><td>Slab 1</td><td>Fixed amount up to slab-1 km (example: first 80 km = Rs 2000)</td></tr>
+    <tr><td>Slab 2</td><td>Fixed amount from after slab 1 up to slab-2 km (example: 81–300 km = Rs 3500)</td></tr>
+    <tr><td>Slab 3</td><td>After slab 2: slab-2 rate + leftover km × per-km rate</td></tr>
+    <tr><td>Return</td><td>Distance is doubled before slabs (local / outstation)</td></tr>
+    <tr><td>Waiting</td><td>Days between start and end × waiting per day for that car</td></tr>
+    <tr><td>Airport</td><td>Fixed pickup or drop; return airport = pickup + drop. No slab.</td></tr>
+  </table>
+
+  <h2>5. Payment gateway</h2>
+  <p>On confirm, the Pay page shows the company GPay UPI ID and QR. Cash stays pending until the owner marks the trip completed. GPay / UPI / card are marked paid at booking.</p>
+
+  <h2>6. My trips</h2>
+  <p>Enter the 10-digit mobile used at booking. Approve, cancel, or mark complete. Cancel and complete trigger WhatsApp greeting text.</p>
+
+  <h2>7. AI assistant</h2>
+  <p>The gold AI button answers fares, cars, waiting, payments and contact in English. It does not replace booking.</p>
+
+  <h2>8. Owner dashboard</h2>
+  <div class="shot">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 260">
+      <rect width="180" height="260" fill="#1b4332"/>
+      <text x="16" y="32" fill="#fff" font-size="13">Owner desk</text>
+      <text x="16" y="64" fill="#d8f3dc" font-size="12">Dashboard</text>
+      <text x="16" y="88" fill="#d8f3dc" font-size="12">Company</text>
+      <text x="16" y="112" fill="#d8f3dc" font-size="12">Fleet and rates</text>
+      <text x="16" y="136" fill="#d8f3dc" font-size="12">Drivers</text>
+      <text x="16" y="160" fill="#d8f3dc" font-size="12">Staff</text>
+      <text x="16" y="184" fill="#d8f3dc" font-size="12">Bookings</text>
+      <text x="16" y="208" fill="#d8f3dc" font-size="12">Accounts</text>
+      <text x="16" y="232" fill="#d8f3dc" font-size="12">Reports</text>
+      <rect x="180" y="0" width="620" height="260" fill="#f7f3ea"/>
+      <rect x="200" y="24" width="130" height="64" rx="10" fill="#fff" stroke="#d5e2d8"/>
+      <text x="212" y="48" font-size="11" fill="#4d6356">Trips</text>
+      <text x="212" y="72" font-size="20" font-family="Georgia">3</text>
+      <rect x="344" y="24" width="130" height="64" rx="10" fill="#fff" stroke="#d5e2d8"/>
+      <text x="356" y="48" font-size="11" fill="#4d6356">Income</text>
+      <text x="356" y="72" font-size="18" font-family="Georgia">Rs 12,900</text>
+      <rect x="200" y="108" width="560" height="130" rx="10" fill="#fff" stroke="#d5e2d8"/>
+      <rect x="230" y="180" width="40" height="40" fill="#2d6a4f"/>
+      <rect x="290" y="150" width="40" height="70" fill="#2d6a4f"/>
+      <rect x="350" y="130" width="40" height="90" fill="#c9a227"/>
+      <text x="220" y="236" font-size="10">airport</text>
+      <text x="288" y="236" font-size="10">local</text>
+      <text x="340" y="236" font-size="10">outstation</text>
+    </svg>
+  </div>
+  <p class="cap">Figure 3. Owner dashboard with KPIs and charts.</p>
+  <ul>
+    <li><strong>Company</strong> — owner name, company, address, phones, WhatsApp, GPay ID, PIN, logo and QR upload.</li>
+    <li><strong>Fleet</strong> — add / edit / delete cars, image upload, 3 slabs, waiting/day, airport pickup and drop.</li>
+    <li><strong>Drivers / Staff</strong> — details, salary, trip charge; edit or delete.</li>
+    <li><strong>Bookings</strong> — live customer bookings and queries; approve / complete / cancel.</li>
+    <li><strong>Accounts</strong> — expenses; income from non-cancelled bookings.</li>
+    <li><strong>Reports</strong> — daily, monthly, annual charts; CSV export for bookings, staff, drivers, expenses.</li>
+  </ul>
+
+  <h2>9. Run on your computer</h2>
+  <pre>git clone https://github.com/YOUR_USER/vedashri-travels.git
+cd vedashri-travels
+npm install
+npm start</pre>
+  <p>Then open http://localhost:3000 and http://localhost:3000/owner.html</p>
+
+  <h2>10. Put the two links on the web</h2>
+  <p>Need Node 18+ and a small always-on host (Railway, Render, a VPS, or any Linux box).</p>
+  <h3>Option A — Render / Railway</h3>
+  <ol>
+    <li>Push the repo to GitHub (section 11).</li>
+    <li>Create a new Web Service from that repo.</li>
+    <li>Build: <code>npm install</code>. Start: <code>npm start</code>.</li>
+    <li>Set PORT if the host requires it (the app already reads <code>process.env.PORT</code>).</li>
+    <li>After deploy:
+      <ul>
+        <li>Customer: https://YOUR-HOST/</li>
+        <li>Owner: https://YOUR-HOST/owner.html</li>
+        <li>App: https://YOUR-HOST/app.html</li>
+      </ul>
+    </li>
+  </ol>
+  <h3>Option B — VPS (Ubuntu)</h3>
+  <pre>sudo apt update
+sudo apt install -y nodejs npm nginx
+git clone https://github.com/YOUR_USER/vedashri-travels.git /var/www/vedashri
+cd /var/www/vedashri
+npm install
+# keep it running
+npx --yes pm2 start server.js --name vedashri
+npx --yes pm2 startup
+npx --yes pm2 save</pre>
+  <p>Nginx example (one public port, both links):</p>
+  <pre>server {
+  listen 80;
+  server_name travels.example.in;
+  location / {
+    proxy_pass http://127.0.0.1:3000;
+    proxy_set_header Host $host;
+  }
+}</pre>
+  <div class="note">Add HTTPS with Let's Encrypt (<code>certbot --nginx</code>) before sharing GPay/QR links with customers. Keep <code>data/store.json</code> backed up; that file is the live database.</div>
+
+  <h2>11. Publish the app to GitHub</h2>
+  <ol>
+    <li>Create a free GitHub account at github.com if needed.</li>
+    <li>New repository named <code>vedashri-travels</code> (Public or Private). Do not add a README on GitHub if this folder already has one.</li>
+    <li>In the project folder:</li>
+  </ol>
+  <pre>git init
+git add .
+git commit -m "Vedashri Travels customer and owner sites"
+git branch -M main
+git remote add origin https://github.com/YOUR_USER/vedashri-travels.git
+git push -u origin main</pre>
+  <p>Replace YOUR_USER. GitHub will ask for a personal access token as the password.</p>
+  <p>Later updates:</p>
+  <pre>git add .
+git commit -m "Describe the change"
+git push</pre>
+  <p>Optional GitHub Pages only serves static files. This app needs Node, so use Render/Railway/VPS for the live customer and owner links. GitHub still holds the source and this PDF.</p>
+
+  <h2>12. Customer mobile app link</h2>
+  <p>Share <code>/app.html</code>. On Android Chrome: menu, Add to Home screen. On iPhone Safari: Share, Add to Home Screen. That icon opens the customer flow.</p>
+
+  <h2>13. Data and limits</h2>
+  <ul>
+    <li>Places are India-only. Map geocoding is restricted to India.</li>
+    <li>Bookings, cars, staff live in <code>data/store.json</code> (no extra database).</li>
+    <li>WhatsApp greetings open wa.me with the owner number; they are not an official WhatsApp Business API.</li>
+    <li>GPay QR is the image the owner uploads. There is no live bank capture in this small build.</li>
+  </ul>
+
+  <p style="margin-top:40px;color:#4d6356">Vedashri Travels · User manual · Keep this PDF with the repository under docs/</p>
+</body>
+</html>

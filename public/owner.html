@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Owner · Vedashri Travels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+  <div id="gate" class="login-box card">
+    <img src="/assets/logo.svg" alt="" style="width:48px;border-radius:10px" />
+    <h2 style="font-family:var(--font)">Owner desk</h2>
+    <p class="muted">Vedashri Travels · enter PIN (default 2145)</p>
+    <input id="pin" type="password" placeholder="PIN" />
+    <p><button class="btn" id="loginBtn">Enter</button> <a class="btn ghost" href="/">Customer site</a></p>
+    <p class="muted" id="loginErr"></p>
+  </div>
+
+  <div id="desk" class="sidebar-layout hide">
+    <aside class="side">
+      <div class="brand" style="padding:8px 8px 18px">
+        <img src="/assets/logo.svg" alt="" id="sideLogo" />
+        <span>Owner desk<small>Vedashri Travels</small></span>
+      </div>
+      <button class="on" data-view="dash">Dashboard</button>
+      <button data-view="company">Company</button>
+      <button data-view="fleet">Fleet &amp; rates</button>
+      <button data-view="drivers">Drivers</button>
+      <button data-view="staff">Staff</button>
+      <button data-view="bookings">Bookings &amp; queries</button>
+      <button data-view="accounts">Accounts</button>
+      <button data-view="reports">Reports</button>
+      <a href="/" style="margin-top:18px">Customer site</a>
+      <button id="logout">Sign out</button>
+    </aside>
+    <main class="main">
+      <section class="view on" id="view-dash">
+        <h2 style="font-family:var(--font)">Dashboard</h2>
+        <div class="kpis" id="kpis"></div>
+        <div class="grid grid-2" style="margin-top:16px">
+          <div class="card"><h3>Income by travel type</h3><canvas class="chart" id="chartType"></canvas></div>
+          <div class="card"><h3>Income by car</h3><canvas class="chart" id="chartCar"></canvas></div>
+        </div>
+        <div class="card" style="margin-top:16px"><h3>Recent bookings</h3><div id="recentBook"></div></div>
+      </section>
+
+      <section class="view hide" id="view-company">
+        <h2 style="font-family:var(--font)">Company profile</h2>
+        <div class="card">
+          <div class="row">
+            <div><label>Owner name</label><input id="c_ownerName" /></div>
+            <div><label>Company name</label><input id="c_companyName" /></div>
+          </div>
+          <label>Tagline</label><input id="c_tagline" />
+          <label>Address</label><textarea id="c_address"></textarea>
+          <div class="row">
+            <div><label>Contact</label><input id="c_contactNo" /></div>
+            <div><label>WhatsApp (with country code)</label><input id="c_whatsappNo" /></div>
+          </div>
+          <div class="row">
+            <div><label>Email</label><input id="c_email" /></div>
+            <div><label>GSTIN</label><input id="c_gstin" /></div>
+          </div>
+          <div class="row">
+            <div><label>GPay / UPI ID</label><input id="c_gpayId" /></div>
+            <div><label>Owner PIN</label><input id="c_ownerPin" /></div>
+          </div>
+          <label>About</label><textarea id="c_about"></textarea>
+          <div class="row" style="margin-top:10px">
+            <div>
+              <label>Logo</label>
+              <input type="file" accept="image/*" id="logoFile" />
+              <img id="logoPrev" style="width:72px;margin-top:8px;border-radius:10px" alt="" />
+            </div>
+            <div>
+              <label>GPay QR</label>
+              <input type="file" accept="image/*" id="qrFile" />
+              <img id="qrPrev" class="qr" style="margin-top:8px" alt="" />
+            </div>
+          </div>
+          <p><button class="btn" id="saveCompany">Save company</button></p>
+        </div>
+      </section>
+
+      <section class="view hide" id="view-fleet">
+        <h2 style="font-family:var(--font)">Fleet &amp; rates</h2>
+        <p class="muted">Three distance slabs per car. Slabs 1 and 2 are fixed amounts. Slab 3 is per km after slab 2. Airport pickup and drop are separate. Waiting is per extra day.</p>
+        <div class="card" id="carForm">
+          <div class="row">
+            <div><label>Name</label><input id="car_name" /></div>
+            <div><label>Type</label><select id="car_type"><option>Sedan</option><option>SUV</option><option>MUV</option><option>Hatchback</option></select></div>
+          </div>
+          <div class="row-3">
+            <div><label>Seats</label><input id="car_seats" type="number" /></div>
+            <div><label>Fuel</label><input id="car_fuel" /></div>
+            <div><label>Number plate</label><input id="car_number" /></div>
+          </div>
+          <div class="row-3">
+            <div><label>Slab 1 km</label><input id="car_slab1Km" type="number" value="80" /></div>
+            <div><label>Slab 1 rate</label><input id="car_slab1Rate" type="number" value="2000" /></div>
+            <div><label>Slab 2 km</label><input id="car_slab2Km" type="number" value="300" /></div>
+          </div>
+          <div class="row-3">
+            <div><label>Slab 2 rate</label><input id="car_slab2Rate" type="number" value="3500" /></div>
+            <div><label>Per km (slab 3)</label><input id="car_perKm" type="number" value="12" /></div>
+            <div><label>Waiting / day</label><input id="car_waitingPerDay" type="number" value="1200" /></div>
+          </div>
+          <div class="row">
+            <div><label>Airport pickup</label><input id="car_airportPickup" type="number" /></div>
+            <div><label>Airport drop</label><input id="car_airportDrop" type="number" /></div>
+          </div>
+          <label>Show on customer site</label>
+          <select id="car_active"><option value="true">Yes</option><option value="false">No</option></select>
+          <label>Car image</label>
+          <input type="file" accept="image/*" id="car_image" />
+          <img id="car_imgPrev" alt="" style="height:72px;margin-top:8px;border-radius:8px;display:none" />
+          <input type="hidden" id="car_id" />
+          <p class="muted" id="carEditHint">Add a new car, or press Edit on a row.</p>
+          <p><button class="btn" id="saveCar">Save car</button> <button class="btn ghost" id="resetCar">New car</button></p>
+        </div>
+        <div class="card" style="margin-top:12px"><table><thead><tr><th>Car</th><th>Slabs</th><th>Airport</th><th>Wait</th><th></th></tr></thead><tbody id="carRows"></tbody></table></div>
+      </section>
+
+      <section class="view hide" id="view-drivers">
+        <h2 style="font-family:var(--font)">Drivers</h2>
+        <div class="card">
+          <input type="hidden" id="drv_id" />
+          <div class="row"><div><label>Name</label><input id="drv_name" /></div><div><label>Phone</label><input id="drv_phone" /></div></div>
+          <div class="row-3">
+            <div><label>License</label><input id="drv_license" /></div>
+            <div><label>Salary</label><input id="drv_salary" type="number" /></div>
+            <div><label>Trip charge</label><input id="drv_chargesPerTrip" type="number" /></div>
+          </div>
+          <label>Assigned car id</label><input id="drv_assignedCarId" />
+          <p><button class="btn" id="saveDrv">Save driver</button></p>
+        </div>
+        <div class="card" style="margin-top:12px"><table><thead><tr><th>Name</th><th>Phone</th><th>Salary</th><th>Trip</th><th></th></tr></thead><tbody id="drvRows"></tbody></table></div>
+      </section>
+
+      <section class="view hide" id="view-staff">
+        <h2 style="font-family:var(--font)">Staff</h2>
+        <div class="card">
+          <input type="hidden" id="stf_id" />
+          <div class="row"><div><label>Name</label><input id="stf_name" /></div><div><label>Role</label><input id="stf_role" /></div></div>
+          <div class="row-3">
+            <div><label>Phone</label><input id="stf_phone" /></div>
+            <div><label>Salary</label><input id="stf_salary" type="number" /></div>
+            <div><label>Join date</label><input id="stf_joinDate" type="date" /></div>
+          </div>
+          <p><button class="btn" id="saveStf">Save staff</button></p>
+        </div>
+        <div class="card" style="margin-top:12px"><table><thead><tr><th>Name</th><th>Role</th><th>Salary</th><th>Join</th><th></th></tr></thead><tbody id="stfRows"></tbody></table></div>
+      </section>
+
+      <section class="view hide" id="view-bookings">
+        <h2 style="font-family:var(--font)">Bookings &amp; queries</h2>
+        <p class="actions">
+          <a class="btn ghost" href="/api/owner/export.csv?kind=bookings">Export bookings CSV</a>
+        </p>
+        <div class="card"><h3>Bookings</h3><div id="bkTable"></div></div>
+        <div class="card" style="margin-top:12px"><h3>Customer queries</h3><div id="qTable"></div></div>
+        <div class="card" style="margin-top:12px"><h3>WhatsApp greetings sent</h3><div id="msgTable"></div></div>
+      </section>
+
+      <section class="view hide" id="view-accounts">
+        <h2 style="font-family:var(--font)">Accounts</h2>
+        <div class="card">
+          <div class="row-3">
+            <div><label>Date</label><input id="exp_date" type="date" /></div>
+            <div><label>Category</label><select id="exp_category"><option>fuel</option><option>salary</option><option>maintenance</option><option>other</option></select></div>
+            <div><label>Amount</label><input id="exp_amount" type="number" /></div>
+          </div>
+          <label>Title</label><input id="exp_title" />
+          <p><button class="btn" id="saveExp">Add expense</button> <a class="btn ghost" href="/api/owner/export.csv?kind=expenses">Export expenses</a></p>
+        </div>
+        <div class="card" style="margin-top:12px" id="expTable"></div>
+      </section>
+
+      <section class="view hide" id="view-reports">
+        <h2 style="font-family:var(--font)">Reports</h2>
+        <div class="actions">
+          <select id="period">
+            <option value="daily">Daily</option>
+            <option value="monthly" selected>Monthly</option>
+            <option value="annual">Annual</option>
+          </select>
+          <input type="date" id="repDate" />
+          <button class="btn" id="runRep">Run</button>
+          <a class="btn ghost" href="/api/owner/export.csv?kind=bookings">CSV bookings</a>
+          <a class="btn ghost" href="/api/owner/export.csv?kind=staff">CSV staff</a>
+          <a class="btn ghost" href="/api/owner/export.csv?kind=drivers">CSV drivers</a>
+        </div>
+        <div class="kpis" id="repKpis" style="margin-top:14px"></div>
+        <div class="card" style="margin-top:12px"><canvas class="chart" id="chartDay"></canvas></div>
+        <div class="card" style="margin-top:12px" id="repTable"></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="/js/owner.js"></script>
+</body>
+</html>

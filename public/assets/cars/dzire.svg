@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" width="320" height="180">
+  <rect width="320" height="180" fill="#e8f5ee"/>
+  <path d="M40 118h240l-18 22H58z" fill="#2d6a4f"/>
+  <rect x="58" y="78" width="204" height="40" rx="8" fill="#40916c"/>
+  <path d="M90 78l22-28h76l28 28" fill="#74c69d"/>
+  <rect x="118" y="56" width="44" height="22" fill="#d8f3dc"/>
+  <rect x="168" y="56" width="40" height="22" fill="#d8f3dc"/>
+  <circle cx="92" cy="128" r="16" fill="#081c15"/>
+  <circle cx="228" cy="128" r="16" fill="#081c15"/>
+  <circle cx="92" cy="128" r="6" fill="#95d5b2"/>
+  <circle cx="228" cy="128" r="6" fill="#95d5b2"/>
+  <text x="160" y="168" text-anchor="middle" font-size="14" fill="#1b4332" font-family="Georgia,serif">Swift Dzire</text>
+</svg>
