@@ -1,14 +1,29 @@
 # Vedashri Travels
 
-India-only car travel desk for **Vedashri Travels**. Two links share one Node.js server:
+India-only car travel desk for **Vedashri Travels**. Three links share one Node.js server.
 
-| Link | Who | Path |
-|------|-----|------|
-| Customer site | Book local, airport and outstation trips | `/index.html` |
-| Customer app | Mobile home-screen view | `/app.html` |
-| Owner desk | Fleet, rates, staff, accounts, reports | `/owner.html` |
+Look in `public/` on GitHub:
+
+| Link | GitHub file | Path |
+|------|-------------|------|
+| Customer (desktop website) | `public/customer.html` | `/customer.html` |
+| Owner dashboard | `public/owner.html` | `/owner.html` |
+| Customer mobile app | `public/app.html` | `/app.html` |
+
+`/` is the same customer site as `/customer.html`. Full list: `LINKS.md`.
 
 Default owner PIN: `2145` (change it under Company).
+
+## Keep data on Render
+
+Without a disk, Render wipes bookings and fleet on every restart. Attach a disk:
+
+1. Render dashboard → your Web Service → **Disks** → **Add disk**
+2. Mount path: `/var/data` (1 GB is enough)
+3. **Environment** → add `DATA_DIR` = `/var/data`
+4. Save and redeploy
+
+Do this on the **existing** service. Do not create a new one. After that, owner edits and customer bookings survive restarts.
 
 ## Run locally
 

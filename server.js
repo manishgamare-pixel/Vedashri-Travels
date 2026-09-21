@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
-const { load, save, nextId, rev, onChange } = require("./lib/store");
+const { load, save, nextId, rev, onChange, DATA_DIR } = require("./lib/store");
 const { quote, haversineKm } = require("./lib/fare");
 const places = require("./data/india-places");
 const geo = require("./lib/geo");
@@ -11,7 +11,7 @@ const chat = require("./lib/chat");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const uploadDir = path.join(__dirname, "public", "uploads");
+const uploadDir = path.join(DATA_DIR, "uploads");
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 
 const storage = multer.diskStorage({
@@ -625,9 +625,11 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
+app.get("/customer", (_req, res) => res.sendFile(path.join(__dirname, "public", "customer.html")));
 app.get("/owner", (_req, res) => res.sendFile(path.join(__dirname, "public", "owner.html")));
 app.get("/app", (_req, res) => res.sendFile(path.join(__dirname, "public", "app.html")));
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log("Vedashri Travels running on http://localhost:" + PORT);
+  console.log("Data file:", require("./lib/store").FILE);
 });

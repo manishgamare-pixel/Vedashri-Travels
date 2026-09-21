@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: vedashri-travels
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    disk:
+      name: vedashri-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DATA_DIR
+        value: /var/data

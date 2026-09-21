@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vedashri Travels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap inner">
+      <a class="brand" href="/" id="brandLink">
+        <img src="/assets/logo.svg" alt="Vedashri Travels" id="logoImg" />
+        <span id="brandName">Vedashri Travels<small id="tagline">India car travel</small></span>
+      </a>
+      <nav>
+        <a href="#home" class="active" data-page="home">Home</a>
+        <a href="#book" data-page="book">Book trip</a>
+        <a href="#fleet" data-page="fleet">Fleet</a>
+        <a href="#trips" data-page="trips">My trips</a>
+        <a href="#pay" data-page="pay">Pay</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page on" id="page-home">
+    <div class="hero">
+      <div class="wrap">
+        <h1>Travel well across India</h1>
+        <p id="heroAbout">Local city rides, airport pickups and outstation journeys. Choose a car, see the route on the map, and pay by GPay or cash.</p>
+        <div class="pills">
+          <span class="pill">Local</span>
+          <span class="pill">Airport pickup &amp; drop</span>
+          <span class="pill">Outstation</span>
+          <span class="pill">Single or return</span>
+        </div>
+        <p style="margin-top:22px">
+          <button class="btn gold" data-go="book">Book a trip</button>
+          <a class="btn ghost" href="/app.html" style="margin-left:8px">Customer app</a>
+        </p>
+      </div>
+    </div>
+    <div class="wrap section">
+      <div class="grid grid-2">
+        <article class="card">
+          <h3>Ask a query</h3>
+          <label>Name</label><input id="qName" placeholder="Your name" />
+          <label>Mobile</label><input id="qPhone" placeholder="10-digit mobile" maxlength="10" />
+          <label>Message</label><textarea id="qMsg" placeholder="Car, date, route…"></textarea>
+          <p><button class="btn sm" id="qBtn">Send to owner</button></p>
+        </article>
+        <article class="card" data-go="book" data-type="local">
+          <h3>Local travel</h3>
+          <p class="muted">City trips billed on three distance slabs. Same-day or with waiting days if you keep the car.</p>
+        </article>
+        <article class="card" data-go="book" data-type="airport">
+          <h3>Airport travel</h3>
+          <p class="muted">Pickup and drop have different fixed rates for each car in the fleet.</p>
+        </article>
+        <article class="card" data-go="book" data-type="outstation">
+          <h3>Outstation travel</h3>
+          <p class="muted">India-wide. Return trips bill both ways. Extra days attract waiting charges per car.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="page-book">
+    <div class="wrap section">
+      <h2 style="font-family:var(--font)">Book your trip</h2>
+      <p class="muted">Type an Indian city or landmark. The map follows the place name — no coordinates needed.</p>
+      <div class="grid grid-2" style="margin-top:16px">
+        <div class="card">
+          <label>Travel type</label>
+          <div class="seg" id="typeSeg">
+            <button class="on" data-v="local">Local</button>
+            <button data-v="airport">Airport</button>
+            <button data-v="outstation">Outstation</button>
+          </div>
+          <div id="airportRow" class="hide" style="margin-top:10px">
+            <label>Airport service</label>
+            <div class="seg" id="airSeg">
+              <button class="on" data-v="pickup">Pickup</button>
+              <button data-v="drop">Drop</button>
+            </div>
+          </div>
+          <label>Journey</label>
+          <div class="seg" id="tripSeg">
+            <button class="on" data-v="single">Single</button>
+            <button data-v="return">Return</button>
+          </div>
+          <div class="suggest">
+            <label>From</label>
+            <input id="fromBox" placeholder="Type a place in India, then press Enter" autocomplete="off" />
+            <ul id="fromList"></ul>
+          </div>
+          <div class="suggest">
+            <label>To</label>
+            <input id="toBox" placeholder="Type a place in India, then press Enter" autocomplete="off" />
+            <ul id="toList"></ul>
+          </div>
+          <p class="muted">Press Enter after typing. You do not enter coordinates.</p>
+          <div class="row">
+            <div>
+              <label>Start date</label>
+              <input type="date" id="startDate" />
+            </div>
+            <div>
+              <label>End date</label>
+              <input type="date" id="endDate" />
+            </div>
+          </div>
+          <p class="muted" id="waitHint">Same-day trip: no waiting charge.</p>
+          <label>Your name</label>
+          <input id="custName" placeholder="Full name" />
+          <label>Mobile</label>
+          <input id="custPhone" placeholder="10-digit Indian mobile" maxlength="10" />
+          <label>Notes</label>
+          <textarea id="notes" placeholder="Flight number, extra stops…"></textarea>
+        </div>
+        <div>
+          <div class="seg" id="mapPick" style="margin-bottom:8px">
+            <button type="button" class="on" id="pickFrom">Tap map: From</button>
+            <button type="button" id="pickTo">Tap map: To</button>
+          </div>
+          <div id="map"></div>
+          <p class="muted" id="mapHint">Type From and press Enter, or tap the map to set pickup.</p>
+          <div class="card" style="margin-top:14px">
+            <h3>Choose a car</h3>
+            <div class="cars" id="carList"></div>
+            <div class="farebox" id="fareBox" style="margin-top:12px">
+              <div class="muted">Estimated fare</div>
+              <div class="big" id="fareTotal">Rs —</div>
+              <div class="muted" id="fareDetail">Select from, to and a car.</div>
+            </div>
+            <label>Pay with</label>
+            <select id="payMethod">
+              <option value="gpay">GPay</option>
+              <option value="upi">UPI</option>
+              <option value="card">Card</option>
+              <option value="cash">Cash</option>
+            </select>
+            <p style="margin-top:14px">
+              <button class="btn" id="bookBtn">Confirm booking</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="page-fleet">
+    <div class="wrap section">
+      <h2 style="font-family:var(--font)">Car fleet</h2>
+      <p class="muted">Rates shown are set by the owner and change with the car you pick.</p>
+      <div class="cars" id="fleetList" style="margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section class="page" id="page-trips">
+    <div class="wrap section">
+      <h2 style="font-family:var(--font)">My trips</h2>
+      <p class="muted">Enter the mobile used at booking. You may approve or cancel anytime.</p>
+      <div class="row" style="max-width:480px;margin:12px 0">
+        <input id="tripPhone" placeholder="10-digit mobile" maxlength="10" />
+        <button class="btn" id="loadTrips">Show trips</button>
+      </div>
+      <div class="card"><table><thead><tr><th>ID</th><th>Route</th><th>When</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody id="tripRows"></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="page" id="page-pay">
+    <div class="wrap section">
+      <h2 style="font-family:var(--font)">Payment</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>GPay / UPI</h3>
+          <p class="muted" id="gpayId">vedashritravels@okicici</p>
+          <img class="qr" id="gpayQr" src="/assets/gpay-qr.svg" alt="GPay QR" />
+          <p class="muted">Scan the QR or pay to the UPI ID. Cash is collected by the driver.</p>
+        </div>
+        <div class="card" id="payResult">
+          <h3>Last booking</h3>
+          <p class="muted">Complete a booking to see the gateway receipt here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap"><span id="foot">Vedashri Travels · India</span> · <a href="/docs/VEDASHRI_TRAVELS_GUIDE.pdf">User manual (PDF)</a></div>
+  </footer>
+
+  <aside class="chat" id="chat">
+    <div class="panel">
+      <div class="head">Vedashri assistant</div>
+      <div class="msgs" id="chatMsgs"></div>
+      <div class="chat-sugs" id="chatSugs"></div>
+      <form id="chatForm"><input id="chatIn" placeholder="Ask fare, booking, map, cars…" /><button class="btn sm">Send</button></form>
+    </div>
+    <button class="fab" id="chatFab" type="button">AI</button>
+  </aside>
+  <div class="toast" id="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/js/customer.js"></script>
+</body>
+</html>
