@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
-const { load, save, nextId, rev, onChange, DATA_DIR } = require("./lib/store");
+const { load, save, nextId, rev, onChange, DATA_DIR, FILE, ready, usingPostgres } = require("./lib/store");
 const { quote, haversineKm } = require("./lib/fare");
 const places = require("./data/india-places");
 const geo = require("./lib/geo");
@@ -629,7 +629,12 @@ app.get("/customer", (_req, res) => res.sendFile(path.join(__dirname, "public", 
 app.get("/owner", (_req, res) => res.sendFile(path.join(__dirname, "public", "owner.html")));
 app.get("/app", (_req, res) => res.sendFile(path.join(__dirname, "public", "app.html")));
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log("Vedashri Travels running on http://localhost:" + PORT);
-  console.log("Data file:", require("./lib/store").FILE);
+ready().then(() => {
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log("Vedashri Travels running on http://localhost:" + PORT);
+    console.log("Storage:", usingPostgres() ? "PostgreSQL" : ("file " + FILE));
+  });
+}).catch((err) => {
+  console.error("Store init failed:", err);
+  process.exit(1);
 });

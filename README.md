@@ -14,7 +14,13 @@ Look in `public/` on GitHub:
 
 Default owner PIN: `2145` (change it under Company).
 
-## Keep data on Render
+## Database
+
+PostgreSQL if `DATABASE_URL` is set (Render). Otherwise `data/store.json`.
+
+On Render, add **PostgreSQL** to the same service and link it. Render sets `DATABASE_URL`. Then redeploy. No paid disk needed.
+
+## Keep data on Render (disk, optional)
 
 Without a disk, Render wipes bookings and fleet on every restart. Attach a disk:
 
@@ -44,3 +50,5 @@ Open http://localhost:3000 (customer) and http://localhost:3000/owner.html (owne
 ## Docs
 
 See `docs/VEDASHRI_TRAVELS_GUIDE.pdf` for hosting, GitHub publish steps, and a user manual.
+
+Render / Railway / VPS step-by-step: `docs/VEDASHRI_DEPLOY_RENDER.pdf`
